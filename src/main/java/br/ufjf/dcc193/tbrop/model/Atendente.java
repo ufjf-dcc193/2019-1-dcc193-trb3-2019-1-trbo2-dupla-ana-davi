@@ -1,7 +1,9 @@
 package br.ufjf.dcc193.tbrop.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,13 +21,13 @@ public class Atendente implements Serializable {
     private String celular;
     private String senha;
 
-    @OneToMany
-    private Atendimento atendimentos;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Atendimento> atendimentos;
 
     public Atendente() {
     }
 
-    public Atendente(Long id, String nome, String email, String telefone, String celular, String senha, Atendimento atendimentos) {
+    public Atendente(Long id, String nome, String email, String telefone, String celular, String senha, List<Atendimento> atendimentos) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -83,11 +85,11 @@ public class Atendente implements Serializable {
         this.senha = senha;
     }
 
-    public Atendimento getAtendimentos() {
+    public List<Atendimento> getAtendimentos() {
         return atendimentos;
     }
 
-    public void setAtendimentos(Atendimento atendimentos) {
+    public void setAtendimentos(List<Atendimento> atendimentos) {
         this.atendimentos = atendimentos;
     }
 
