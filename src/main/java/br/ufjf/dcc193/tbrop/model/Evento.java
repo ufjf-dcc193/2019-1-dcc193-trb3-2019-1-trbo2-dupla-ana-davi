@@ -63,6 +63,21 @@ public class Evento implements Serializable {
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
+    
+    public String getTipoNome(){
+        switch (tipo) {
+            case 1:
+                return "Abertura";
+            case 2:
+                return "Fechamento";
+            case 3:
+                return "Alteração de usuário";
+            case 4:
+                return "Alteração de categoria";
+            default:
+                return "";
+        }
+    }
 
     public Atendente getAtendente() {
         return atendente;
