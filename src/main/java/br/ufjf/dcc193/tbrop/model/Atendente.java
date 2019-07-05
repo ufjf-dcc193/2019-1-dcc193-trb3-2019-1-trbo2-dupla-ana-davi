@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Atendente implements Serializable {
@@ -18,16 +19,20 @@ public class Atendente implements Serializable {
     private String celular;
     private String senha;
 
+    @OneToMany
+    private Atendimento atendimentos;
+
     public Atendente() {
     }
 
-    public Atendente(Long id, String nome, String email, String telefone, String celular, String senha) {
+    public Atendente(Long id, String nome, String email, String telefone, String celular, String senha, Atendimento atendimentos) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.celular = celular;
         this.senha = senha;
+        this.atendimentos = atendimentos;
     }
 
     public Long getId() {
@@ -78,8 +83,17 @@ public class Atendente implements Serializable {
         this.senha = senha;
     }
 
+    public Atendimento getAtendimentos() {
+        return atendimentos;
+    }
+
+    public void setAtendimentos(Atendimento atendimentos) {
+        this.atendimentos = atendimentos;
+    }
+
     @Override
     public String toString() {
-        return "Atendente{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", celular=" + celular + ", senha=" + senha + '}';
+        return "Atendente{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", celular=" + celular + ", senha=" + senha + ", atendimentos=" + atendimentos + '}';
     }
+
 }
