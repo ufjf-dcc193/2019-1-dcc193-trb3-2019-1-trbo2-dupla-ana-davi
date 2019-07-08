@@ -44,7 +44,7 @@ public class CategoriaController {
         return "redirect:/categorias";
     }
 
-    @RequestMapping("admin/categorias/delete/{id}")
+    @RequestMapping("categorias/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         categoriaRepository.deleteById(id);
         return "redirect:/categorias";
