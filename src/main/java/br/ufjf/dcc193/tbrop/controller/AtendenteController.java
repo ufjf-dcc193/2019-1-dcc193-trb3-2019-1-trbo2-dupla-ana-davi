@@ -1,7 +1,6 @@
 package br.ufjf.dcc193.tbrop.controller;
 
 import br.ufjf.dcc193.tbrop.model.Atendente;
-import br.ufjf.dcc193.tbrop.model.Categoria;
 import br.ufjf.dcc193.tbrop.repository.AtendenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
