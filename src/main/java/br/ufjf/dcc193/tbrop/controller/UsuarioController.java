@@ -20,7 +20,7 @@ public class UsuarioController {
         return "usuario/index";
     }
 
-    @RequestMapping("admin/usuarios/create")
+    @RequestMapping("usuarios/create")
     public String criar(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "usuario/create";

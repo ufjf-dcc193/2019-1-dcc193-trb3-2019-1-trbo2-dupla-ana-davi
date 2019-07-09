@@ -68,7 +68,7 @@
                         <div class="card-header">
                             <i class="fa fa-tags"></i> Categoria 
                         </div>
-                        <form th:action="@{/categorias/store}" th:object="${categoria}" method="post">
+                        <form th:action="@{/categorias/update}" th:object="${categoria}" method="post">
                             <input type="hidden" th:field="*{id}"/>
                             <div class="card-body">
                                 <div class="form-group">
