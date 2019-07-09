@@ -67,25 +67,25 @@ public class AtendimentoController {
         return "atendimento/details";
     }
 
-    @RequestMapping("atendimentos/details/category/{id}")
+    @RequestMapping("atendimentos/list/category/{id}")
     public String listByCategoria(@PathVariable Long id, Model model) {
         model.addAttribute("atendimentos", getAtendimentosNaoFechadosByCategoria(categoriaRepository.findById(id).get()));
 
-        return "list-by-category";
+        return "atendimento/list-by-category";
     }
 
-    @RequestMapping("atendimentos/details/user/{id}")
+    @RequestMapping("atendimentos/list/user/{id}")
     public String listByUsuario(@PathVariable Long id, Model model) {
         model.addAttribute("atendimentos", getAtendimentosNaoFechadosByUsuario(usuarioRepository.findById(id).get()));
 
-        return "atendimento/details-by-user";
+        return "atendimento/list-by-user";
     }
 
-    @RequestMapping("atendimentos/details/atendente/{id}")
+    @RequestMapping("atendimentos/list/atendente/{id}")
     public String listByAtendente(@PathVariable Long id, Model model) {
         model.addAttribute("atendimentos", getAtendimentosNaoFechadosByAtendente(atendenteRepository.findById(id).get()));
 
-        return "atendimento/details-by-user";
+        return "atendimento/list-by-clerk";
     }
 
     private List<Atendimento> getAtendimentosNaoFechadosByCategoria(Categoria categoria){
