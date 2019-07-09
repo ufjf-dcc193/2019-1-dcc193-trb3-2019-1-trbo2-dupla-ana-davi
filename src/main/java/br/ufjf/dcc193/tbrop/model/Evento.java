@@ -23,16 +23,16 @@ public class Evento implements Serializable {
     private Date dataHora;
     private int tipo;
     @OneToOne
-    private Atendente atendente;
+    private Atendimento atendimento;
 
     public Evento() {
     }
 
-    public Evento(Long id, Date dataHora, int tipo, Atendente atendente) {
+    public Evento(Long id, Date dataHora, int tipo, Atendimento atendimento) {
         this.id = id;
         this.dataHora = dataHora;
         this.tipo = tipo;
-        this.atendente = atendente;
+        this.atendimento = atendimento;
     }
 
     public Long getId() {
@@ -79,17 +79,21 @@ public class Evento implements Serializable {
         }
     }
 
-    public Atendente getAtendente() {
-        return atendente;
+    public Atendimento getAtendimento() {
+        return atendimento;
     }
 
-    public void setAtendente(Atendente atendente) {
-        this.atendente = atendente;
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
     }
 
     @Override
     public String toString() {
-        return "Evento{" + "id=" + id + ", dataHora=" + dataHora + ", tipo=" + tipo + ", atendente=" + atendente + '}';
+        return "Evento{" +
+                "id=" + id +
+                ", dataHora=" + dataHora +
+                ", tipo=" + tipo +
+                ", atendimento=" + atendimento +
+                '}';
     }
-
 }

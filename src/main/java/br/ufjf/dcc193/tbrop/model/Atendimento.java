@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -27,7 +29,7 @@ public class Atendimento implements Serializable {
     private Categoria categoria;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @CreationTimestamp
     private Date dataCriacao;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
