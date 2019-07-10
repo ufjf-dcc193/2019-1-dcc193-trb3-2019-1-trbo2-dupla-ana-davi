@@ -76,12 +76,13 @@ public class AtendimentoController {
 
     @RequestMapping("atendimentos/list/user/{id}")
     public String listByUsuario(@PathVariable Long id, Model model) {
-        model.addAttribute("atendimentos", getAtendimentosNaoFechadosByUsuario(usuarioRepository.findById(id).get()));
+        model.addAttribute("atendimentos", atendimentoRepository.findAllByUsuario(usuarioRepository.findById(id).get()));
+        model.addAttribute("totalAtendimentos", atendimentoRepository.findAllByUsuario(usuarioRepository.findById(id).get()).size());
 
         return "atendimento/list-by-user";
     }
 
-    @RequestMapping("atendimentos/list/atendente/{id}")
+    @RequestMapping("atendimentos/list/clerk/{id}")
     public String listByAtendente(@PathVariable Long id, Model model) {
         model.addAttribute("atendimentos", getAtendimentosNaoFechadosByAtendente(atendenteRepository.findById(id).get()));
 

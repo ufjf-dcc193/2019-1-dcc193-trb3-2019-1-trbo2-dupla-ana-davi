@@ -92,6 +92,7 @@
                                                 <div class="btn-group">
                                                     <a th:href="@{'/atendentes/edit/' + ${atendente.id}}" class="btn btn-sm btn-primary">Editar</a>
                                                     <a  th:href="@{'/atendentes/delete/' + ${atendente.id}}" class="btn btn-sm btn-danger">Excluir</a>
+                                                    <a  th:href="@{'atendimentos/list/clerk/' + ${atendente.id}}" class="btn btn-sm btn-info">Atendimentos</a>
                                                 </div>
                                             </td>
                                         </tr>

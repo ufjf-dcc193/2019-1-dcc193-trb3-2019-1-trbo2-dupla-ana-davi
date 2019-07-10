@@ -88,6 +88,7 @@
                                                 <div class="btn-group">
                                                     <a th:href="@{'/categorias/edit/' + ${categoria.id}}" class="btn btn-sm btn-primary">Editar</a>
                                                     <a  th:href="@{'/categorias/delete/' + ${categoria.id}}" class="btn btn-sm btn-danger">Excluir</a>
+                                                    <a  th:href="@{'atendimentos/list/category/' + ${categoria.id}}" class="btn btn-sm btn-info">Atendimentos</a>
                                                 </div>
                                             </td>
                                         </tr>
