@@ -18,20 +18,33 @@ public class Evento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataHora;
+    
     private int tipo;
+    
+    private String descricao;
+    
     @OneToOne
     private Atendimento atendimento;
+    
+    public static int TIPO_ABERTURA = 1;
+    public static int TIPO_FECHAMENTO = 2;
+    public static int TIPO_ALTERACAO_USUARIO = 3;
+    public static int TIPO_ALTERACAO_CATEGORIA = 4;
+    public static int TIPO_ALTERACAO_ATENDENTE = 5;
+    public static int TIPO_ALTERACAO_STATUS = 6;
 
     public Evento() {
     }
 
-    public Evento(Long id, Date dataHora, int tipo, Atendimento atendimento) {
+    public Evento(Long id, Date dataHora, int tipo, String descricao, Atendimento atendimento) {
         this.id = id;
         this.dataHora = dataHora;
         this.tipo = tipo;
+        this.descricao = descricao;
         this.atendimento = atendimento;
     }
 
@@ -50,8 +63,8 @@ public class Evento implements Serializable {
     public void setDataHora(Date dataHora) {
         this.dataHora = dataHora;
     }
-    
-    public String getDataHoraBR(){
+
+    public String getDataHoraBR() {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return formato.format(dataHora);
     }
@@ -63,8 +76,8 @@ public class Evento implements Serializable {
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-    
-    public String getTipoNome(){
+
+    public String getTipoNome() {
         switch (tipo) {
             case 1:
                 return "Abertura";
@@ -74,9 +87,21 @@ public class Evento implements Serializable {
                 return "Alteração de usuário";
             case 4:
                 return "Alteração de categoria";
+            case 5:
+                return "Alteração de atendente";
+            case 6:
+                return "Alteração de status";
             default:
                 return "";
         }
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Atendimento getAtendimento() {
@@ -89,11 +114,7 @@ public class Evento implements Serializable {
 
     @Override
     public String toString() {
-        return "Evento{" +
-                "id=" + id +
-                ", dataHora=" + dataHora +
-                ", tipo=" + tipo +
-                ", atendimento=" + atendimento +
-                '}';
+        return "Evento{" + "id=" + id + ", dataHora=" + dataHora + ", tipo=" + tipo + ", descricao=" + descricao + ", atendimento=" + atendimento + '}';
     }
+
 }

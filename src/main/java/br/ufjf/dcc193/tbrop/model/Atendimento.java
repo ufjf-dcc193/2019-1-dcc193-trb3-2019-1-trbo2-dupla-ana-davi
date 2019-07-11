@@ -30,6 +30,7 @@ public class Atendimento implements Serializable {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @CreationTimestamp
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCriacao;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -46,8 +47,14 @@ public class Atendimento implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Evento> eventos;
-    
+
     private String descricao;
+
+    public static int STATUS_EMREVISAO = 1;
+    public static int STATUS_ABERTO = 2;
+    public static int STATUS_BLOQUEADO = 3;
+    public static int STATUS_EMANDAMENTO = 4;
+    public static int STATUS_FECHADO = 5;
 
     public Atendimento() {
     }
@@ -154,7 +161,7 @@ public class Atendimento implements Serializable {
     public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
     }
-    
+
     public String getDescricao() {
         return descricao;
     }
