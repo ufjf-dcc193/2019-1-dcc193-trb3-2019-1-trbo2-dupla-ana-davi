@@ -25,7 +25,7 @@ $(document).ready(function () {
             {"orderable": false, className: "text-center"}
         ]
     });
-    $('#tbUsuarios, #tbAtendentes').DataTable({
+    $('#tbUsuarios, #tbAtendentes, #tbAtendimentos').DataTable({
         "language": {
             "search": "Buscar:",
             "lengthMenu": "Exibir _MENU_ registros por página",
