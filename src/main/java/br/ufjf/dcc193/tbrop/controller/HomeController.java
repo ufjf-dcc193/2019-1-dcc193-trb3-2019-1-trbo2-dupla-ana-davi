@@ -101,4 +101,28 @@ public class HomeController {
         session.invalidate();
         return "redirect:/singin/perfil";
     }
+
+    @RequestMapping({"singup/atendentes"})
+    public String singupAtendente(Model model) {
+        model.addAttribute("atendente", new Atendente());
+        return "home/singup-atendente";
+    }
+
+    @RequestMapping({"singup/atendentes/save"})
+    public String registerAtendente(Atendente atendente) {
+        atendenteRepository.save(atendente);
+        return "redirect:/singin/atendentes";
+    }
+
+    @RequestMapping({"singup/usuarios"})
+    public String singupUsuario(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "home/singup-usuario";
+    }
+    
+    @RequestMapping({"singup/usuarios/save"})
+    public String registerUsuario(Usuario usuario) {
+        usuarioRepository.save(usuario);
+        return "redirect:/singin/usuarios";
+    }
 }
