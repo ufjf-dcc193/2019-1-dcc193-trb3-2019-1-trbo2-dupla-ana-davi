@@ -4,7 +4,7 @@
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <meta name="description" content="Trabalho 3"/>
+        <meta name="description" content="Trabalho Opcional"/>
         <meta name="author" content="Ana Carolina Fidelis Gonçalves e Davi de Almeida Cardoso"/>
 
         <title>Trabalho Opicional | Atendentes</title>
@@ -30,93 +30,83 @@
             <!-- Sidebar -->
             <ul class="sidebar navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">
+                    <a class="nav-link" th:href="@{/admin}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Home</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/categorias}">
+                    <a class="nav-link" th:href="@{/admin/categorias}">
                         <i class="fa fa-tags"></i>
                         <span>Categorias</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/atendentes}">
+                    <a class="nav-link" th:href="@{/admin/atendentes}">
                         <i class="fa fa-user-secret"></i>
                         <span>Atendentes</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/usuarios}">
+                    <a class="nav-link" th:href="@{/admin/usuarios}">
                         <i class="fa fa-users"></i>
                         <span>Usuários</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">
+                    <a class="nav-link" th:href="@{/admin/atendimentos}">
                         <i class="fa fa-list-ol"></i>
                         <span>Atendimentos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">
+                        <i class="fa fa-sign-out"></i>
+                        <span>Sair</span>
                     </a>
                 </li>
             </ul>
 
             <div id="content-wrapper">
                 <div class="container-fluid">
+                    <p class="text-right"> <i class="fa fa-user-secret"></i> Atendente: <span th:text="${adminUser.nome}"></span></p>
                     <!-- Breadcrumbs-->
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a th:href="@{/atendentes}">Atendentes</a>
-                        </li>
-                        <li class="breadcrumb-item active">Alterar</li>
+                        <li class="breadcrumb-item active">Atendentes</li>
                     </ol>
                     <div class="card mb-3">
                         <div class="card-header">
-                            <i class="fa fa-user-secret"></i> Atendente
+                            <i class="fa fa-user-secret"></i> Atendentes
                         </div>
-                        <form th:action="@{/atendentes/update}" th:object="${atendente}" method="post">
-                            <input type="hidden" th:field="*{id}"/>
-                            <div class="card-body">
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="nome">Nome Completo</label>
-                                            <input type="text" class="form-control" th:field="*{nome}" required=""/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="telefone">Telefone</label>
-                                            <input type="text" class="form-control" th:field="*{telefone}" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="celular">Celular</label>
-                                            <input type="text" class="form-control" th:field="*{celular}"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="text" class="form-control" th:field="*{email}" required=""/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="senha">Senha</label>
-                                            <input type="text" class="form-control" th:field="*{senha}" required=""/>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="card-body">
+                            <a class="btn btn-success mb-3" th:href="@{/admin/atendentes/create}"><i class="fas fa-plus"></i> Novo Atendente</a>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="tbAtendentes" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>NOME</th>
+                                            <th>EMAIL</th>
+                                            <th>CELULAR</th>
+                                            <th>AÇÕES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="atendente: ${atendentes}">
+                                            <td th:text="${atendente.nome}"></td>
+                                            <td th:text="${atendente.email}"></td>
+                                            <td th:text="${atendente.celular}"></td>
+                                            <td class="text-center">
+                                                <div class="btn-group">
+                                                    <a th:href="@{'/admin/atendentes/edit/' + ${atendente.id}}" class="btn btn-sm btn-primary">Editar</a>
+                                                    <a  th:href="@{'/admin/atendentes/delete/' + ${atendente.id}}" class="btn btn-sm btn-danger">Excluir</a>
+                                                    <a  th:href="@{'/admin/atendimentos/list/clerk/' + ${atendente.id}}" class="btn btn-sm btn-info">Atendimentos</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="card-footer">
-                                <a class="btn btn-dark" th:href="@{/atendentes}"><i class="fas fa-chevron-left"></i> Voltar</a>
-                                <button class="btn btn-primary" type="submit">Salvar</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
 

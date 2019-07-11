@@ -15,10 +15,9 @@ public class AdminController {
             Atendente adminUser = (Atendente) session.getAttribute("adminUser");
             model.addAttribute("adminUser", adminUser);
             return "admin/index";
-        }else{
+        } else {
             return "redirect:/logout";
         }
-
     }
 
     private boolean isLogado(HttpSession session) {
