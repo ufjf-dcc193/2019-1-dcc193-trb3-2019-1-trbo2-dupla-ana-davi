@@ -262,7 +262,7 @@ public class AtendimentosController {
         Atendente adminUser = (Atendente) session.getAttribute("adminUser");
         model.addAttribute("adminUser", adminUser);
         model.addAttribute("atendimentos", getAtendimentosNaoFechadosByCategoria(categoriaRepository.findById(id).get()));
-        
+        model.addAttribute("categoria", categoriaRepository.findById(id).get());
         return "admin/atendimentos/list-by-category";
     }
     
@@ -275,7 +275,7 @@ public class AtendimentosController {
         model.addAttribute("adminUser", adminUser);
         model.addAttribute("atendimentos", atendimentoRepository.findAllByUsuario(usuarioRepository.findById(id).get()));
         model.addAttribute("totalAtendimentos", atendimentoRepository.findAllByUsuario(usuarioRepository.findById(id).get()).size());
-        
+        model.addAttribute("usuario", usuarioRepository.findById(id).get());
         return "admin/atendimentos/list-by-user";
     }
     
@@ -287,8 +287,8 @@ public class AtendimentosController {
         Atendente adminUser = (Atendente) session.getAttribute("adminUser");
         model.addAttribute("adminUser", adminUser);
         model.addAttribute("atendimentos", getAtendimentosNaoFechadosByAtendente(atendenteRepository.findById(id).get()));
-        
-        return "admin/atendimento/list-by-clerk";
+        model.addAttribute("atendente", atendenteRepository.findById(id).get());
+        return "admin/atendimentos/list-by-clerk";
     }
     
     private List<Atendimento> getAtendimentosNaoFechadosByCategoria(Categoria categoria) {

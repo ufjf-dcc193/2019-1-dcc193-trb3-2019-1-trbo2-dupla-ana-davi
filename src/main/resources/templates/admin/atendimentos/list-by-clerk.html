@@ -72,31 +72,35 @@
                     <p class="text-right"> <i class="fa fa-user-secret"></i> Atendente: <span th:text="${adminUser.nome}"></span></p>
                     <!-- Breadcrumbs-->
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">Atendente</li>
+                        <li class="breadcrumb-item">
+                            <a th:href="@{/admin/atendentes}">Atendentes</a>
+                        </li>
+                        <li class="breadcrumb-item active"><span th:text="${atendente.nome}"></span></li>
                     </ol>
                     <div class="card mb-3">
                         <div class="card-header">
-                            <i class="fa fa-users"></i> Atendimentos
+                            <i class="fa fa-list-ol"></i> Atendimentos
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="tbAtendimentos" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Descrição</th>
-                                            <th>Categoria</th>
-                                            <th>Status</th>
-                                            <th>Ações</th>
+                                            <th>NÚMERO</th>
+                                            <th>CATEGORIA</th>
+                                            <th>STATUS</th>
+                                            <th>AÇOES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="atendimento: ${atendimentos}">
                                             <td th:text="${atendimento.descricao}"></td>
-                                            <td th:text="${atendimento.categoria}"></td>
-                                            <td th:text="${atendimento.getStatusNome()}"></td>
+                                            <td th:text="${atendimento.categoria.titulo}"></td>
+                                            <td th:text="${atendimento.statusNome}"></td>
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                    <a th:href="@{'/usuarios/edit/' + ${atendimento.id}}" class="btn btn-sm btn-primary">Alterar Status</a>
+                                                    <a th:href="@{'/admin/atendimentos/details/' + ${atendimento.id}}" class="btn btn-sm btn-dark">Detalhes</a>
+                                                    <a  th:href="@{'/admin/atendimentos/delete/' + ${atendimento.id}}" class="btn btn-sm btn-danger">Excluir</a>
                                                 </div>
                                             </td>
                                         </tr>
