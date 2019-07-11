@@ -97,7 +97,7 @@
                                             <td th:text="${atendimento.statusNome}"></td>
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                    <a th:href="@{'/admin/atendimentos/edit/' + ${atendimento.id}}" class="btn btn-sm btn-primary">Editar</a>
+                                                    <a th:href="@{'/admin/atendimentos/details/' + ${atendimento.id}}" class="btn btn-sm btn-dark">Detalhes</a>
                                                     <a  th:href="@{'/admin/atendimentos/delete/' + ${atendimento.id}}" class="btn btn-sm btn-danger">Excluir</a>
                                                 </div>
                                             </td>
