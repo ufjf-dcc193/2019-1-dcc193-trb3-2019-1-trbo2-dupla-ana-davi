@@ -30,37 +30,37 @@
             <!-- Sidebar -->
             <ul class="sidebar navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">
+                    <a class="nav-link" th:href="@{/admin}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Home</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/categorias}">
+                    <a class="nav-link" th:href="@{/admin/categorias}">
                         <i class="fa fa-tags"></i>
                         <span>Categorias</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/atendentes}">
+                    <a class="nav-link" th:href="@{/admin/atendentes}">
                         <i class="fa fa-user-secret"></i>
                         <span>Atendentes</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/usuarios}">
+                    <a class="nav-link" th:href="@{/admin/usuarios}">
                         <i class="fa fa-users"></i>
                         <span>Usuários</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/atendimentos}">
+                    <a class="nav-link" th:href="@{/admin/atendimentos}">
                         <i class="fa fa-list-ol"></i>
                         <span>Atendimentos</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{'/logout}">
+                    <a class="nav-link" th:href="@{/logout}">
                         <i class="fa fa-sign-out"></i>
                         <span>Sair</span>
                     </a>
@@ -69,9 +69,75 @@
 
             <div id="content-wrapper">
                 <div class="container-fluid">
+                    <p class="text-right"> <i class="fa fa-user-secret"></i> Atendente: <span th:text="${adminUser.nome}"></span></p>
 
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <div class="card text-white bg-primary o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-tags"></i>
+                                    </div>
+                                    <div>Categorias</div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1" th:href="@{/admin/categorias}">
+                                    <span class="float-left">Ir</span>
+                                    <span class="float-right">
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <div class="card text-white bg-warning o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-user-secret"></i>
+                                    </div>
+                                    <div>Atendentes</div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1" th:href="@{/admin/atendentes}">
+                                    <span class="float-left">Ir</span>
+                                    <span class="float-right">
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <div class="card text-white bg-success o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-users"></i>
+                                    </div>
+                                    <div>Usuários</div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1" th:href="@{/admin/usuarios}">
+                                    <span class="float-left">Ir</span>
+                                    <span class="float-right">
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <div class="card text-white bg-danger o-hidden h-100">
+                                <div class="card-body">
+                                    <div class="card-body-icon">
+                                        <i class="fa fa-fw fa-list-ol"></i>
+                                    </div>
+                                    <div>Atendimentos</div>
+                                </div>
+                                <a class="card-footer text-white clearfix small z-1" th:href="@{/admin/atendimentos}">
+                                    <span class="float-left">Ir</span>
+                                    <span class="float-right">
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
                 <!-- Sticky Footer -->
                 <footer class="sticky-footer">
                     <div class="container my-auto">
