@@ -27,9 +27,9 @@ public class HomeController {
         if (atendente == null && usuario == null) {
             return "redirect:/singin/perfil";
         } else if (atendente != null) { //logado como atendente
-            return "redirect:/atendentes";
+            return "redirect:/admin";
         } else { //logado como usuário
-            return "redirect:/usuarios";
+            return "redirect:/usuario";
         }
     }
 
@@ -39,16 +39,16 @@ public class HomeController {
         Usuario usuario = (Usuario) session.getAttribute("user");
 
         if (atendente != null) { //logado como atendente
-            return "redirect:/atendentes";
+            return "redirect:/admin";
         }
 
         if (usuario != null) { //logado como usuário
-            return "redirect:/usuarios";
+            return "redirect:/usuario";
         }
         return "home/perfil";
     }
 
-    @RequestMapping({"singin/atendentes"})
+    @RequestMapping({"singin/atendente"})
     public String singinAtendente(Model model, HttpSession session) {
         Atendente atendente = (Atendente) session.getAttribute("adminUser");
 
@@ -57,22 +57,22 @@ public class HomeController {
             return "home/singin-atendente";
         }
         model.addAttribute("adminUser", atendente);
-        return "atendentes/index";
+        return "admin/index";
     }
 
-    @RequestMapping({"login/atendentes"})
+    @RequestMapping({"login/atendente"})
     public String loginAtendente(Atendente atendente, HttpSession session) {
         Atendente adminUser = atendenteRepository.findFirstByEmailAndSenha(atendente.getEmail(), atendente.getSenha());
 
         if (adminUser != null) {
             session.setAttribute("adminUser", adminUser);
             session.setAttribute("user", null);
-            return "redirect:/atendentes";
+            return "redirect:/admin";
         }
-        return "redirect:/singin/atendentes";
+        return "redirect:/singin/atendente";
     }
 
-    @RequestMapping({"singin/usuarios"})
+    @RequestMapping({"singin/usuario"})
     public String singinUsuario(Model model, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("user");
 
@@ -81,19 +81,19 @@ public class HomeController {
             return "home/singin-usuario";
         }
         model.addAttribute("user", usuario);
-        return "usuarios/index";
+        return "usuario/index";
     }
 
-    @RequestMapping({"login/usuarios"})
+    @RequestMapping({"login/usuario"})
     public String loginUsuario(Usuario usuario, HttpSession session) {
         Usuario user = usuarioRepository.findFirstByEmailAndSenha(usuario.getEmail(), usuario.getSenha());
 
         if (user != null) {
             session.setAttribute("adminUser", null);
             session.setAttribute("user", user);
-            return "redirect:/usuarios";
+            return "redirect:/usuario";
         }
-        return "redirect:/singin/usuarios";
+        return "redirect:/singin/usuario";
     }
 
     @RequestMapping({"logout"})
@@ -102,27 +102,27 @@ public class HomeController {
         return "redirect:/singin/perfil";
     }
 
-    @RequestMapping({"singup/atendentes"})
+    @RequestMapping({"singup/atendente"})
     public String singupAtendente(Model model) {
         model.addAttribute("atendente", new Atendente());
         return "home/singup-atendente";
     }
 
-    @RequestMapping({"singup/atendentes/save"})
+    @RequestMapping({"singup/atendente/save"})
     public String registerAtendente(Atendente atendente) {
         atendenteRepository.save(atendente);
-        return "redirect:/singin/atendentes";
+        return "redirect:/singin/atendente";
     }
 
-    @RequestMapping({"singup/usuarios"})
+    @RequestMapping({"singup/usuario"})
     public String singupUsuario(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "home/singup-usuario";
     }
     
-    @RequestMapping({"singup/usuarios/save"})
+    @RequestMapping({"singup/usuario/save"})
     public String registerUsuario(Usuario usuario) {
         usuarioRepository.save(usuario);
-        return "redirect:/singin/usuarios";
+        return "redirect:/singin/usuario";
     }
 }

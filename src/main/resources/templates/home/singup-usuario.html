@@ -24,7 +24,7 @@
             <div class="card card-register mx-auto mt-5">
                 <div class="card-header"><i class="fa fa-users"></i> Registrar Usuário</div>
                 <div class="card-body">
-                    <form  th:action="@{/singup/usuarios/save}" th:object="${usuario}">
+                    <form  th:action="@{/singup/usuario/save}" th:object="${usuario}">
                         <div class="form-group">
                             <label for="nome">Nome Completo</label>
                             <input type="text" class="form-control" th:field="*{nome}" required=""/>
