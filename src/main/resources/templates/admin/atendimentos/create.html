@@ -82,7 +82,6 @@
                             <i class="fa fa-list-ol"></i> Atendimento
                         </div>
                         <form th:action="@{'/admin/atendimentos/store'}" th:object="${atendimento}" method="post">
-                            <input type="hidden" th:field="*{atendente}" th:value="${adminUser.id}"/>
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="col-md-6">
@@ -99,7 +98,7 @@
                                             <label for="categoria">Categoria</label>
                                             <select class="form-control" name="categoria" required="">
                                                 <option value="">Selecione</option>
-                                                <option th:each="categoria: ${categorias}" th:value="${categoria.id}" th:text="${categoria.descricao}"></option>
+                                                <option th:each="categoria: ${categorias}" th:value="${categoria.id}" th:text="${categoria.titulo}"></option>
                                             </select>
                                         </div>
                                     </div>

@@ -1,8 +1,6 @@
 package br.ufjf.dcc193.tbrop.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 
@@ -13,10 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Atendimento implements Serializable {
@@ -27,15 +21,10 @@ public class Atendimento implements Serializable {
 
     @OneToOne
     private Categoria categoria;
+    
+    private String dataCriacao;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @CreationTimestamp
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataCriacao;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataFechamento;
+    private String dataFechamento;
 
     @OneToOne
     private Atendente atendente;
@@ -59,7 +48,7 @@ public class Atendimento implements Serializable {
     public Atendimento() {
     }
 
-    public Atendimento(Long id, Categoria categoria, Date dataCriacao, Date dataFechamento, Atendente atendente, Usuario usuario, int status, List<Evento> eventos, String descricao) {
+    public Atendimento(Long id, Categoria categoria, String dataCriacao, String dataFechamento, Atendente atendente, Usuario usuario, int status, List<Evento> eventos, String descricao) {
         this.id = id;
         this.categoria = categoria;
         this.dataCriacao = dataCriacao;
@@ -87,30 +76,20 @@ public class Atendimento implements Serializable {
         this.categoria = categoria;
     }
 
-    public Date getDataCriacao() {
+    public String getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Date dataCriacao) {
+    public void setDataCriacao(String dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
-    public String getDataCriacaoBR() {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return formato.format(dataCriacao);
-    }
-
-    public Date getDataFechamento() {
+    public String getDataFechamento() {
         return dataFechamento;
     }
 
-    public void setDataFechamento(Date dataFechamento) {
+    public void setDataFechamento(String dataFechamento) {
         this.dataFechamento = dataFechamento;
-    }
-
-    public String getDataFechamentoBR() {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return formato.format(dataFechamento);
     }
 
     public Atendente getAtendente() {

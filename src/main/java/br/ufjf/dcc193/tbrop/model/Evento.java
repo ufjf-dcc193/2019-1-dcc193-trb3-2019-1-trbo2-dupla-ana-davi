@@ -1,16 +1,11 @@
 package br.ufjf.dcc193.tbrop.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Evento implements Serializable {
@@ -19,9 +14,7 @@ public class Evento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataHora;
+    private String dataHora;
     
     private int tipo;
     
@@ -40,7 +33,7 @@ public class Evento implements Serializable {
     public Evento() {
     }
 
-    public Evento(Long id, Date dataHora, int tipo, String descricao, Atendimento atendimento) {
+    public Evento(Long id, String dataHora, int tipo, String descricao, Atendimento atendimento) {
         this.id = id;
         this.dataHora = dataHora;
         this.tipo = tipo;
@@ -56,17 +49,12 @@ public class Evento implements Serializable {
         this.id = id;
     }
 
-    public Date getDataHora() {
+    public String getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(Date dataHora) {
+    public void setDataHora(String dataHora) {
         this.dataHora = dataHora;
-    }
-
-    public String getDataHoraBR() {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return formato.format(dataHora);
     }
 
     public int getTipo() {

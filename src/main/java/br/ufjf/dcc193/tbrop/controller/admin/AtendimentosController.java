@@ -2,6 +2,7 @@ package br.ufjf.dcc193.tbrop.controller.admin;
 
 import br.ufjf.dcc193.tbrop.model.*;
 import br.ufjf.dcc193.tbrop.repository.*;
+import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +34,7 @@ public class AtendimentosController {
 
     @RequestMapping("admin/atendimentos")
     public String index(Model model, HttpSession session) {
-         if (!isLogado(session)) {
+        if (!isLogado(session)) {
             return "redirect:/logout";
         }
         Atendente adminUser = (Atendente) session.getAttribute("adminUser");
@@ -44,7 +45,7 @@ public class AtendimentosController {
 
     @RequestMapping("admin/atendimentos/create")
     public String criar(Model model, HttpSession session) {
-         if (!isLogado(session)) {
+        if (!isLogado(session)) {
             return "redirect:/logout";
         }
         Atendente adminUser = (Atendente) session.getAttribute("adminUser");
@@ -57,15 +58,21 @@ public class AtendimentosController {
     }
 
     @RequestMapping("admin/atendimentos/store")
-    public String store(Atendimento atendimento) {
+    public String store(Atendimento atendimento, HttpSession session) {
+        Date dataCriacao = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Atendente adminUser = (Atendente) session.getAttribute("adminUser");
+        
+        atendimento.setAtendente(adminUser);
         atendimento.setStatus(Atendimento.STATUS_EMREVISAO);
-        atendimento.setDataCriacao(new Date());
+        atendimento.setDataCriacao(formato.format(dataCriacao));
         atendimentoRepository.save(atendimento);
 
         //setar dados do evento...
         Evento eventoAbertura = new Evento();
+        eventoAbertura.setAtendimento(atendimento);
         eventoAbertura.setTipo(Evento.TIPO_ABERTURA);
-        eventoAbertura.setDataHora(new Date());
+        eventoAbertura.setDataHora(formato.format(dataCriacao));
         eventoAbertura.setDescricao("Abertura: " + atendimento.getDescricao());
         eventoRepository.save(eventoAbertura);
 
@@ -74,7 +81,7 @@ public class AtendimentosController {
 
     @RequestMapping("admin/atendimentos/details/{id}")
     public String detalhes(@PathVariable Long id, Model model, HttpSession session) {
-         if (!isLogado(session)) {
+        if (!isLogado(session)) {
             return "redirect:/logout";
         }
         Atendente adminUser = (Atendente) session.getAttribute("adminUser");
@@ -87,7 +94,7 @@ public class AtendimentosController {
 
     @RequestMapping("admin/atendimentos/list/category/{id}")
     public String listByCategoria(@PathVariable Long id, Model model, HttpSession session) {
-         if (!isLogado(session)) {
+        if (!isLogado(session)) {
             return "redirect:/logout";
         }
         Atendente adminUser = (Atendente) session.getAttribute("adminUser");
@@ -99,7 +106,7 @@ public class AtendimentosController {
 
     @RequestMapping("admin/atendimentos/list/user/{id}")
     public String listByUsuario(@PathVariable Long id, Model model, HttpSession session) {
-         if (!isLogado(session)) {
+        if (!isLogado(session)) {
             return "redirect:/logout";
         }
         Atendente adminUser = (Atendente) session.getAttribute("adminUser");
@@ -112,7 +119,7 @@ public class AtendimentosController {
 
     @RequestMapping("admin/atendimentos/list/clerk/{id}")
     public String listByAtendente(@PathVariable Long id, Model model, HttpSession session) {
-         if (!isLogado(session)) {
+        if (!isLogado(session)) {
             return "redirect:/logout";
         }
         Atendente adminUser = (Atendente) session.getAttribute("adminUser");
@@ -122,7 +129,7 @@ public class AtendimentosController {
         return "admin/atendimento/list-by-clerk";
     }
 
-    private List<Atendimento> getAtendimentosNaoFechadosByCategoria(Categoria categoria){
+    private List<Atendimento> getAtendimentosNaoFechadosByCategoria(Categoria categoria) {
         List<Atendimento> atendimentos = atendimentoRepository.findAllByCategoria(categoria);
         List<Atendimento> atendimentosNaoFechados = new ArrayList<>();
 
